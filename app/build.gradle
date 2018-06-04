@@ -1,0 +1,96 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-kapt'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.wayfair.themoviedb"
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "ENDPOINT", "\"https://api.themoviedb.org/3/\""
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enabled true
+    }
+}
+
+dependencies {
+    final SUPPORT_LIBRARIES='27.1.1'
+    final CONSTRAINT_LAYOUT = '1.1.0'
+    final RETROFIT_VERSION = '2.4.0'
+    final OKHTTP_VERSION = '3.10.0'
+    final DAGGER_VERSION = '2.15'
+    final BUTTER_KNIFE_VERSION = '8.8.1'
+    final REACTIVE_ANDROID = '2.0.1'
+    final REACTIVE_JAVA = '2.0.1'
+    final TIMBER_VERSION = '4.6.0'
+    final FRESCO_VERSION = '1.9.0'
+    final GSON_VERSION = '2.8.0'
+    final BRICKKIT_VERSION = '0.9.32'
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "com.android.support:appcompat-v7:$SUPPORT_LIBRARIES"
+    implementation "com.android.support:recyclerview-v7:$SUPPORT_LIBRARIES"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation "com.android.support:cardview-v7:$SUPPORT_LIBRARIES"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //Wayfair Brikkit
+    implementation "com.wayfair:brickkit-android:$BRICKKIT_VERSION"
+
+    //rest interactions
+    implementation "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    implementation "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
+
+    //Gson
+    implementation "com.google.code.gson:gson:$GSON_VERSION"
+    implementation "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
+
+    //http logging
+    implementation "com.squareup.okhttp3:logging-interceptor:$OKHTTP_VERSION"
+
+    //injection
+
+    //Dagger 2
+    implementation "com.google.dagger:dagger:$DAGGER_VERSION"
+    kapt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+
+    implementation "com.google.dagger:dagger-android:$DAGGER_VERSION"
+    implementation "com.google.dagger:dagger-android-support:$DAGGER_VERSION"
+    kapt "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
+
+    //RxJava && RxAndroid
+    implementation "io.reactivex.rxjava2:rxjava:$REACTIVE_JAVA"
+    implementation "io.reactivex.rxjava2:rxandroid:$REACTIVE_ANDROID"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$RETROFIT_VERSION"
+
+    //Fresco
+    implementation "com.facebook.fresco:fresco:$FRESCO_VERSION"
+
+    //Timber logging tool
+    implementation "com.jakewharton.timber:timber:$TIMBER_VERSION"
+}
