@@ -21,6 +21,8 @@ public interface SearchResultsContract {
 
         void hideProgressBar();
 
+        void hideSearchViewVisibility();
+
         void addSearchResultBrick(SearchResultViewModel searchResultViewModel);
     }
 

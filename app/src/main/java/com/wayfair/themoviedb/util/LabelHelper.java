@@ -30,13 +30,13 @@ public class LabelHelper {
         int labelColor;
         switch (mediaType) {
             case movie:
-                labelColor = R.color.red_900;
+                labelColor = R.color.red_300;
                 break;
             case tv:
-                labelColor = R.color.green_900;
+                labelColor = R.color.green_300;
                 break;
             case person:
-                labelColor = R.color.light_blue_900;
+                labelColor = R.color.light_blue_300;
                 break;
             default:
                 labelColor = R.color.red_300;

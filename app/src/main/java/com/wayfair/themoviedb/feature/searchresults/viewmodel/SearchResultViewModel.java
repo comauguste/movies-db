@@ -5,11 +5,13 @@ import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
 import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.RatingBar;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.wayfair.brickkit.brick.ViewModel;
 import com.wayfair.themoviedb.feature.searchresults.datamodel.SearchResultDataModel;
+import com.wayfair.themoviedb.util.Enums;
 import com.wayfair.themoviedb.util.ImageHelper;
 
 import org.jetbrains.annotations.NotNull;
@@ -45,6 +47,11 @@ public class SearchResultViewModel extends ViewModel<SearchResultDataModel> {
         return dataModel.getAverageVote() != null ? dataModel.getAverageVote().floatValue() : 0f;
     }
 
+
+    public int getRatingBarVisibility() {
+        return dataModel.getMediaType().equals(Enums.MediaType.person.toString()) ? View.GONE : View.VISIBLE;
+    }
+
     @BindingAdapter("android:rating")
     public static void setRating(RatingBar view, float rating) {
         if (view.getRating() != rating) {
@@ -56,10 +63,9 @@ public class SearchResultViewModel extends ViewModel<SearchResultDataModel> {
         return getLabel(resources, dataModel.getMediaType());
     }
 
-    @ColorRes
     @Bindable
     public int getMediaTypeLabelColor() {
-        return getLabelColor(dataModel.getMediaType());
+        return resources.getColor(getLabelColor(dataModel.getMediaType()));
     }
 
 }

@@ -48,7 +48,7 @@ public class SearchResultDataModel extends DataModel {
     }
 
     public Double getAverageVote() {
-        return averageVote / 2;
+        return averageVote != null ? averageVote / 2 : 0;
     }
 
     private String getPeoplePicturePath(Result result) {

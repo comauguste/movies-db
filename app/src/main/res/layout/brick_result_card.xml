@@ -90,6 +90,7 @@
                     android:layout_marginTop="8dp"
                     android:numStars="5"
                     android:rating="@{viewModel.averageVote}"
+                    android:visibility="@{viewModel.ratingBarVisibility}"
                     android:stepSize="0.5"
                     android:theme="@style/RatingBar"
                     app:layout_constraintEnd_toEndOf="parent"

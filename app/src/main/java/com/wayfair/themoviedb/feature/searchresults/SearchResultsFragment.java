@@ -99,6 +99,11 @@ public class SearchResultsFragment extends BaseFragment<SearchResultsPresenter> 
     }
 
     @Override
+    public void hideSearchViewVisibility() {
+        ((MainActivity) getActivity()).setSearchViewVisibility(View.GONE);
+    }
+
+    @Override
     public void addSearchResultBrick(SearchResultViewModel searchResultViewModel) {
         dataManager.addLast(new ViewModelBrick.Builder(R.layout.brick_result_card)
                 .setPadding(new InnerOuterBrickPadding(8, 8))
