@@ -13,7 +13,7 @@ public class Result {
     public String originalName;
     @SerializedName("id")
     @Expose
-    public Integer id;
+    public Long id;
     @SerializedName("media_type")
     @Expose
     public String mediaType;
@@ -22,13 +22,16 @@ public class Result {
     public String name;
     @SerializedName("vote_count")
     @Expose
-    public Integer voteCount;
+    public Long voteCount;
     @SerializedName("vote_average")
     @Expose
     public Double voteAverage;
     @SerializedName("poster_path")
     @Expose
     public String posterPath;
+    @SerializedName("profile_path")
+    @Expose
+    public String profilePath;
     @SerializedName("first_air_date")
     @Expose
     public String firstAirDate;
@@ -65,9 +68,6 @@ public class Result {
     @SerializedName("release_date")
     @Expose
     public String releaseDate;
-    @SerializedName("profile_path")
-    @Expose
-    public Object profilePath;
     @SerializedName("known_for")
     @Expose
     public List<KnownFor> knownFor = null;

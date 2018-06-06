@@ -31,7 +31,7 @@ public class KnownFor {
     public Double popularity;
     @SerializedName("poster_path")
     @Expose
-    public Object posterPath;
+    public String posterPath;
     @SerializedName("original_language")
     @Expose
     public String originalLanguage;

@@ -93,4 +93,7 @@ dependencies {
 
     //Timber logging tool
     implementation "com.jakewharton.timber:timber:$TIMBER_VERSION"
+
+    //Constrainlayout
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
 }

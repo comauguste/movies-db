@@ -1,7 +1,8 @@
 package com.wayfair.themoviedb.feature.searchresults;
 
 import com.pubbix.base.BasePresenter;
-import com.wayfair.brickkit.brick.DataModel;
+import com.wayfair.themoviedb.feature.searchresults.datamodel.SearchResultDataModel;
+import com.wayfair.themoviedb.feature.searchresults.viewmodel.SearchResultViewModel;
 
 import java.util.List;
 
@@ -36,7 +37,11 @@ public class SearchResultsPresenter extends BasePresenter<SearchResultsFragment,
     }
 
     @Override
-    public void renderSearchResults(List<DataModel> dataModels) {
-
+    public void renderSearchResults(List<SearchResultDataModel> searchResultDataModels) {
+        view.hideProgressBar();
+        for (SearchResultDataModel searchResultDataModel : searchResultDataModels){
+            //TODO inject resources
+            view.addSearchResultBrick(new SearchResultViewModel(searchResultDataModel, view.getResources()));
+        }
     }
 }

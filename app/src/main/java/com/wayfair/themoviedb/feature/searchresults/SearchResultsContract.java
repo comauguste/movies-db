@@ -1,9 +1,8 @@
 package com.wayfair.themoviedb.feature.searchresults;
 
 import com.pubbix.base.BaseView;
-import com.wayfair.brickkit.brick.DataModel;
 import com.wayfair.themoviedb.base.BaseRouter;
-import com.wayfair.themoviedb.data.model.response.Result;
+import com.wayfair.themoviedb.feature.searchresults.datamodel.SearchResultDataModel;
 import com.wayfair.themoviedb.feature.searchresults.viewmodel.SearchResultViewModel;
 
 import java.util.List;
@@ -34,13 +33,13 @@ public interface SearchResultsContract {
 
         void fetchData(String searchTerms);
 
-        void renderSearchResults(List<DataModel> dataModels);
+        void renderSearchResults(List<SearchResultDataModel> searchResultDataModels);
     }
 
     interface Interactor {
         void fetchData(String searchTerms);
 
-        void onFetchDataSuccess(List<Result> result);
+        void onFetchDataSuccess(List<SearchResultDataModel> searchResultDataModels);
 
         void onFetchDataFailure(Throwable throwable);
 

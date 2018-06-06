@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.pubbix.base.BaseFragment;
 import com.wayfair.brickkit.brick.ViewModelBrick;
+import com.wayfair.brickkit.padding.InnerOuterBrickPadding;
 import com.wayfair.themoviedb.BR;
 import com.wayfair.themoviedb.R;
 import com.wayfair.themoviedb.feature.MainActivity;
@@ -99,7 +100,10 @@ public class SearchResultsFragment extends BaseFragment<SearchResultsPresenter> 
 
     @Override
     public void addSearchResultBrick(SearchResultViewModel searchResultViewModel) {
-
+        dataManager.addLast(new ViewModelBrick.Builder(R.layout.brick_result_card)
+                .setPadding(new InnerOuterBrickPadding(8, 8))
+                .addViewModel(BR.viewModel, searchResultViewModel)
+                .build());
     }
 
     private String formatHeaderText(String searchTerms) {

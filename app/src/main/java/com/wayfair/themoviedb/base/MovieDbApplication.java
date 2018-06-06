@@ -2,6 +2,7 @@ package com.wayfair.themoviedb.base;
 
 import android.app.Application;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.pubbix.modules.AndroidModule;
 import com.pubbix.modules.ApiModule;
 import com.pubbix.modules.NetModule;
@@ -31,6 +32,7 @@ public class MovieDbApplication extends Application {
             Timber.plant(new Timber.DebugTree());
         }
 
+        Fresco.initialize(this);
     }
 
     protected ApplicationComponent initComponent() {

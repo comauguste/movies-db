@@ -1,7 +1,7 @@
 package com.wayfair.themoviedb.feature.searchresults;
 
 import com.pubbix.base.BaseInteractor;
-import com.wayfair.themoviedb.data.model.response.Result;
+import com.wayfair.themoviedb.feature.searchresults.datamodel.SearchResultDataModel;
 
 import java.util.List;
 
@@ -26,9 +26,8 @@ public class SearchResultsInteractor extends BaseInteractor<SearchResultsContrac
     }
 
     @Override
-    public void onFetchDataSuccess(List<Result> result) {
-        List<Result> results = result;
-
+    public void onFetchDataSuccess(List<SearchResultDataModel> searchResultDataModels) {
+        presenter.renderSearchResults(searchResultDataModels);
     }
 
     @Override
