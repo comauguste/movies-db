@@ -1,7 +1,9 @@
 package com.wayfair.themoviedb.feature.searchresults;
 
 import com.pubbix.base.BasePresenter;
+import com.wayfair.themoviedb.feature.searchresults.datamodel.SearchBarDataModel;
 import com.wayfair.themoviedb.feature.searchresults.datamodel.SearchResultDataModel;
+import com.wayfair.themoviedb.feature.searchresults.viewmodel.SearchBarViewModel;
 import com.wayfair.themoviedb.feature.searchresults.viewmodel.SearchResultViewModel;
 
 import java.util.List;
@@ -13,6 +15,7 @@ public class SearchResultsPresenter extends BasePresenter<SearchResultsFragment,
     private SearchResultsFragment view;
     private SearchResultsContract.Interactor interactor;
     private SearchResultsContract.Router router;
+
     @Inject
     public SearchResultsPresenter(SearchResultsFragment view,
                                   SearchResultsContract.Interactor interactor,
@@ -25,9 +28,7 @@ public class SearchResultsPresenter extends BasePresenter<SearchResultsFragment,
 
     @Override
     public void setUpViews(String searchTerms) {
-        view.showSearchCardView();
-        view.setSearchViewText(searchTerms);
-        view.showSearchResultsHeader(searchTerms);
+        view.addSearchBarViewModel(new SearchBarViewModel(new SearchBarDataModel(searchTerms), interactor));
         view.showProgressBar();
     }
 
@@ -37,9 +38,11 @@ public class SearchResultsPresenter extends BasePresenter<SearchResultsFragment,
     }
 
     @Override
-    public void renderSearchResults(List<SearchResultDataModel> searchResultDataModels) {
+    public void renderSearchResults(List<SearchResultDataModel> searchResultDataModels, String searchTerms) {
         view.hideProgressBar();
-        for (SearchResultDataModel searchResultDataModel : searchResultDataModels){
+        view.clear();
+        view.addSearchResultsHeader(searchTerms);
+        for (SearchResultDataModel searchResultDataModel : searchResultDataModels) {
             //TODO inject resources
             view.addSearchResultBrick(new SearchResultViewModel(searchResultDataModel, view.getResources()));
         }

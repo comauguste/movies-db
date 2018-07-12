@@ -11,4 +11,9 @@ public class SearchResultsRouter implements SearchResultsContract.Router {
     SearchResultsRouter(DefaultScreenNavigator navigator) {
         this.navigator = navigator;
     }
+
+    @Override
+    public void goBack() {
+        navigator.pop();
+    }
 }

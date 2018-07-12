@@ -18,26 +18,11 @@ import javax.inject.Inject;
 
 public class MainActivity extends BaseActivity {
 
-    @Inject
-    DefaultScreenNavigator navigator;
-
-    LinearLayout searchViewLayout;
-    SearchView searchView;
-    ImageButton backButton;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        searchViewLayout = findViewById(R.id.search_view_layout);
-        searchView = findViewById(R.id.search_view);
-        backButton = findViewById(R.id.back_button);
-        backButton.setOnClickListener(view -> {
-            navigator.pop();
-            searchViewLayout.setVisibility(View.GONE);
-        });
     }
 
     @Override
@@ -48,14 +33,6 @@ public class MainActivity extends BaseActivity {
     @Override
     public Fragment initialScreen() {
         return HomepageFragment.newInstance();
-    }
-
-    public void setSearchViewVisibility(int visibility){
-        searchViewLayout.setVisibility(visibility);
-    }
-
-    public void setSearchViewText(String searchTerms){
-        searchView.setQuery(searchTerms, false);
     }
 
 }

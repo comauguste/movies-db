@@ -1,19 +1,24 @@
 package com.wayfair.themoviedb.feature.searchresults;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.OrientationHelper;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.pubbix.base.BaseFragment;
 import com.wayfair.brickkit.brick.ViewModelBrick;
 import com.wayfair.brickkit.padding.InnerOuterBrickPadding;
 import com.wayfair.themoviedb.BR;
 import com.wayfair.themoviedb.R;
-import com.wayfair.themoviedb.feature.MainActivity;
+import com.wayfair.themoviedb.databinding.FragmentSearchResultsBinding;
 import com.wayfair.themoviedb.feature.searchresults.datamodel.ProgressBarDataModel;
 import com.wayfair.themoviedb.feature.searchresults.viewmodel.ProgressBarViewModel;
+import com.wayfair.themoviedb.feature.searchresults.viewmodel.SearchBarViewModel;
 import com.wayfair.themoviedb.feature.searchresults.viewmodel.SearchResultViewModel;
 import com.wayfair.themoviedb.util.brick.FullWidthBrickSize;
 import com.wayfair.themoviedb.util.brick.common.ParagraphBrick;
@@ -25,16 +30,8 @@ import java.util.UUID;
 public class SearchResultsFragment extends BaseFragment<SearchResultsPresenter> implements SearchResultsContract.View {
 
     private String searchTerms;
-    private ParagraphBrick searchResultsHeader;
     private ViewModelBrick progressBarBrick;
-
-    public static Fragment newInstance() {
-        Bundle bundle = new Bundle();
-        bundle.putString("instance_id", UUID.randomUUID().toString());
-        Fragment fragment = new SearchResultsFragment();
-        fragment.setArguments(bundle);
-        return fragment;
-    }
+    private FragmentSearchResultsBinding binding;
 
     public static SearchResultsFragment newInstance(String searchTerms) {
         Bundle bundle = new Bundle();
@@ -43,6 +40,16 @@ public class SearchResultsFragment extends BaseFragment<SearchResultsPresenter> 
         fragment.searchTerms = searchTerms;
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_results, container, false);
+        dataManager.setRecyclerView(getContext(), binding.getRoot().findViewById(R.id.recycler_view),
+                OrientationHelper.VERTICAL, false, binding.getRoot());
+
+        return binding.getRoot();
     }
 
     @Override
@@ -62,25 +69,13 @@ public class SearchResultsFragment extends BaseFragment<SearchResultsPresenter> 
     }
 
     @Override
-    public void showSearchCardView() {
-        ((MainActivity) getActivity()).setSearchViewVisibility(View.VISIBLE);
+    public void addSearchBarViewModel(SearchBarViewModel viewModel) {
+        binding.setViewModel(viewModel);
     }
 
     @Override
-    public void setSearchViewText(String searchTerms) {
-        ((MainActivity) getActivity()).setSearchViewText(searchTerms);
-    }
-
-    @Override
-    public void showSearchResultsHeader(String searchTerms) {
-        searchResultsHeader = new ParagraphBrick(formatHeaderText(searchTerms));
-        dataManager.addLast(searchResultsHeader);
-    }
-
-    @Override
-    public void setSearchResultsHeader(String searchTerms) {
-        searchResultsHeader.setParagraph(formatHeaderText(searchTerms));
-        dataManager.refreshItem(searchResultsHeader);
+    public void addSearchResultsHeader(String searchTerms) {
+        dataManager.addLast(new ParagraphBrick(formatHeaderText(searchTerms)));
     }
 
     @Override
@@ -98,10 +93,6 @@ public class SearchResultsFragment extends BaseFragment<SearchResultsPresenter> 
         dataManager.hideItem(progressBarBrick);
     }
 
-    @Override
-    public void hideSearchViewVisibility() {
-        ((MainActivity) getActivity()).setSearchViewVisibility(View.GONE);
-    }
 
     @Override
     public void addSearchResultBrick(SearchResultViewModel searchResultViewModel) {
@@ -109,6 +100,11 @@ public class SearchResultsFragment extends BaseFragment<SearchResultsPresenter> 
                 .setPadding(new InnerOuterBrickPadding(8, 8))
                 .addViewModel(BR.viewModel, searchResultViewModel)
                 .build());
+    }
+
+    @Override
+    public void clear() {
+        dataManager.clear();
     }
 
     private String formatHeaderText(String searchTerms) {
