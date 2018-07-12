@@ -45,6 +45,7 @@ dependencies {
     final REACTIVE_JAVA = '2.0.1'
     final TIMBER_VERSION = '4.6.0'
     final FRESCO_VERSION = '1.9.0'
+    final MOCKITO_VERSION = '2.10.0'
     final GSON_VERSION = '2.8.0'
     final BRICKKIT_VERSION = '0.9.32'
 
@@ -56,6 +57,7 @@ dependencies {
     implementation "com.android.support:cardview-v7:$SUPPORT_LIBRARIES"
 
     testImplementation 'junit:junit:4.12'
+    testImplementation "org.mockito:mockito-core:$MOCKITO_VERSION"
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
