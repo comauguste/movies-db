@@ -1,4 +1,4 @@
-package com.pubbix.base
+package com.wayfair.themoviedb.base
 
 interface BaseView {
     fun showMessage(message: String)

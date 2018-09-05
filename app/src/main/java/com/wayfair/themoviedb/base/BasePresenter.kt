@@ -1,5 +1,7 @@
 package com.pubbix.base
 
+import com.wayfair.themoviedb.base.BaseView
+
 open class BasePresenter<V : BaseView, I : Any> {
 
     protected var view: V? = null
